@@ -7,11 +7,15 @@ PWD = `pwd`
 install:
 	@npm install --registry=http://r.cnpmjs.org --disturl=http://dist.cnpmjs.org
 
-build: install
-	./node_modules/.bin/gitbook build --output=$(PWD)/book/
+build b: install
+	@-rm index.html
+	@./node_modules/.bin/gitbook build --output=$(PWD)/book/
+	@cp _index.html index.html
 
-serve: install
-	./node_modules/.bin/gitbook serve --output=$(PWD)/book/
+serve s: install
+	@-rm index.html
+	@./node_modules/.bin/gitbook serve --output=$(PWD)/book/
+	@cp _index.html index.html
 
 contributors: install
 	@./node_modules/.bin/contributors -f plain -o AUTHORS
