@@ -2,37 +2,16 @@ TESTS = test/*.test.js
 REPORTER = spec
 TIMEOUT = 1000
 MOCHA_OPTS =
+PWD = `pwd`
 
 install:
 	@npm install --registry=http://r.cnpmjs.org --disturl=http://dist.cnpmjs.org
 
-jshint: install
-	@./node_modules/.bin/jshint .
+build: install
+	./node_modules/.bin/gitbook build --output=$(PWD)/.book/
 
-test: install
-	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--harmony \
-		--reporter $(REPORTER) \
-		--timeout $(TIMEOUT) \
-		$(MOCHA_OPTS) \
-		$(TESTS)
-
-test-cov cov: install
-	@NODE_ENV=test node --harmony \
-		node_modules/.bin/istanbul cover --preserve-comments \
-		./node_modules/.bin/_mocha \
-		-- -u exports \
-		--reporter $(REPORTER) \
-		--timeout $(TIMEOUT) \
-		$(MOCHA_OPTS) \
-		$(TESTS)
-	@./node_modules/.bin/cov coverage
-
-test-all: install jshint test cov
-
-autod: install
-	@./node_modules/.bin/autod -w
-	@$(MAKE) install
+serve: install
+	./node_modules/.bin/gitbook serve --output=$(PWD)/.book/
 
 contributors: install
 	@./node_modules/.bin/contributors -f plain -o AUTHORS

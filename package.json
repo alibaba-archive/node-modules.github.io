@@ -1,10 +1,11 @@
 {
   "name": "book",
   "version": "0.0.0",
-  "description": "book",
+  "description": "A book about our node_modules",
   "main": "index.js",
   "scripts": {
-    "test": "make test-all"
+    "serve": "gitbook serve",
+    "build": "gitbook build --output=.book/"
   },
   "config": {
     "cov": {
@@ -15,13 +16,8 @@
 
   },
   "devDependencies": {
-    "autod": "*",
-    "contributors": "*",
-    "should": "*",
-    "jshint": "*",
-    "cov": "*",
-    "istanbul-harmony": "*",
-    "mocha": "*"
+    "gitbook": "*",
+    "contributors": "*"
   },
   "homepage": "https://github.com/node-modules/book",
   "repository": {
